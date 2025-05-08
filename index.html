@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>Made with Needle</title>
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="./src/styles/style.css" />
+  <style>
+    body {
+      background-color: #000;
+      font-family: system-ui, sans-serif;
+      font-size: 20px;
+      color: black;
+    }
+
+    h1 {
+      font-size: 5rem;
+      line-height: 1em;
+    }
+
+    @media (width < 900px) {
+      body {
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+    }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .header {
+      opacity: 0.5;
+    }
+
+    .spacer {
+      height: 10rem;
+    }
+
+    .background-layout {
+      position: absolute;
+      width: 100%;
+      height: calc(100% - 50px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      text-align: center;
+
+      &>* {
+        max-width: min(40ch, 700px);
+        margin: 1rem;
+      }
+
+      & button {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    button {
+      border: none;
+      outline: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    button#open_docs {
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s 0.1s;
+    }
+
+    button#open_docs:hover {
+      background-color: #ddaadd;
+      transform: translateY(-0.5rem);
+    }
+
+    .ontop {
+      z-index: 999999;
+      transition: all 0.2s 0.1s;
+    }
+
+    .backdrop-filter {
+      color: black;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    }
+
+    .scale_on_hover {
+      transition: all 0.2s 0.1s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .options {
+      display: flex;
+      gap: .8rem;
+      background: none;
+      backdrop-filter: none;
+      padding: 0;
+      box-shadow: none;
+      pointer-events: none;
+
+      &:hover {
+        transform: none;
+      }
+
+      & button {
+        pointer-events: initial;
+        border: none;
+        padding: 0;
+        background: rgba(200, 200, 250, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+        outline: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      & img {
+        width: 100px;
+      }
+    }
+
+    .controls {
+      & button {
+        background: rgba(0, 0, 0, 0.2);
+        color: rgba(255, 255, 255, 0.9);
+        outline: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.2rem;
+        padding: 0.5rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module" src="./src/main.ts"></script>
+  <div class="background-layout">
+    <h1 class="header">Needle Engine Pointer Demo</h1>
+    <!-- <button id="open_docs">Open Documentation</button> -->
+    <span>
+      This little demo shows how 3D content can be placed on top of your HTML
+      with the HTML elements still being active and receicing pointer events.
+      <a href="https://docs.needle.tools/getting-started" target="_blank">Get started with Needle Engine for free
+        now.</a>
+    </span>
+    <div class="spacer"></div>
+    <span class="ontop options">
+      <button class="scale_on_hover" data-src="https://cloud.needle.tools/-/assets/Z23hmXBZN45qJ-ZN45qJ-world/file"
+        data-background-color="rgb(100, 100, 90)">
+        <img src="https://cloud.needle.tools/-/assets/thumbnails/p1uKo/file" />
+      </button>
+      <button class="scale_on_hover" data-src="https://cloud.needle.tools/-/assets/Z23hmXBHIrXY-latest-optimized/file"
+        data-background-color="rgb(150, 150, 90)">
+        <img src="https://cloud.needle.tools/-/assets/thumbnails/ZRwzme/file" />
+      </button>
+      <button class="scale_on_hover" data-src="https://cloud.needle.tools/-/assets/Z23hmXBZ1Mqr5s-latest-product/file"
+        data-background-color="rgb(100, 150, 200)">
+        <img src="https://cloud.needle.tools/-/assets/thumbnails/23wYUD/file?t=57337" />
+      </button>
+    </span>
+    <span class="ontop options controls">
+      <button data-rotate="-90">Rotate Left</button>
+      <button data-rotate="90">Rotate Right</button>
+    </span>
+  </div>
+  <!-- https://engine.needle.tools/docs/reference/needle-engine-attributes -->
+  <needle-engine autoplay background-color="transparent" contactshadows=".8"></needle-engine>
+  <div class="overlay-layout"></div>
+</body>
+
+</html>

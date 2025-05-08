@@ -32,7 +32,6 @@ jobs:
         id: deploy
         with:
           token: ${{ secrets.NEEDLE_CLOUD_TOKEN }}
-          name: vite-template
           dir: ./dist
         env:
           NODE_ENV: production

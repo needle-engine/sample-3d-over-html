@@ -2,13 +2,15 @@ import { Behaviour, NEPointerEvent, showBalloonMessage } from '@needle-tools/eng
 
 export class ClickThrough extends Behaviour {
   onEnable() {
-    // Register for the pointer move event LATE in the event queue
+    // Register for pointer down and pointer move event
+    this.context.input.addEventListener('pointerdown', this.onPointerEvent);
     this.context.input.addEventListener('pointermove', this.onPointerEvent, {
       queue: 100,
     });
     window.addEventListener("touchend", this.onTouchEnd, { passive: true });
   }
   onDisable() {
+    this.context.input.removeEventListener('pointerdown', this.onPointerEvent);
     this.context.input.removeEventListener('pointermove', this.onPointerEvent);
     window.removeEventListener("touchend", this.onTouchEnd);
     this.context.domElement.style.pointerEvents = 'all';
@@ -27,6 +29,7 @@ export class ClickThrough extends Behaviour {
       this.context.domElement.style.pointerEvents = 'all';
     }
   };
+
   private onTouchEnd = (_evt: TouchEvent) => {
     setTimeout(() => {
       this.context.domElement.style.pointerEvents = 'all';
